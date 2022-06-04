@@ -30,10 +30,10 @@ REF_ROOT_ROT = transformations.quaternion_from_euler(0, 0, 0.5 * np.pi)
 REF_jOINT_NUM = 15
 REF_HIP_JOINT_ID = 0
 REF_NECK_JOINT_ID = 7
-REF_HEAD_JOINT_ID = 14
-REF_HIP_JOINT_IDS = [1, 4, 8, 11]
-REF_MID_JOINT_IDS = [2, 5, 9, 12]
-REF_TOE_JOINT_IDS = [3, 6, 10, 13]
+REF_HEAD_JOINT_ID = 8
+REF_HIP_JOINT_IDS = [1, 4, 9, 12]
+REF_MID_JOINT_IDS = [2, 5, 10, 13]
+REF_TOE_JOINT_IDS = [3, 6, 11, 14]
 lock = 0
 
 
@@ -400,7 +400,7 @@ def output_motion(frames, out_filename, frame_duration):
         f.write("\n]")
         f.write("\n}")
 
-    return
+    return True
 
 
 def main(txt_data):
@@ -411,7 +411,8 @@ def main(txt_data):
     init_rot = transformations.quaternion_from_euler(txt_data['init_rot'][0], txt_data['init_rot'][1],
                                                      txt_data['init_rot'][2], axes="sxyz")
     init_pos = np.array(txt_data['init_pos'])
-    while True:
+    done =False
+    while not done:
 
         pybullet.resetSimulation()
         pybullet.setGravity(0, 0, 0)
@@ -432,7 +433,7 @@ def main(txt_data):
         marker_ids = build_markers(num_markers)  # build the key points
 
         retarget_frames = retarget_motion(robot, joint_pos_data, txt_data['motion_name'], init_rot)
-        output_motion(retarget_frames, txt_data['output_path'], txt_data['frame_duration'])
+        done = output_motion(retarget_frames, txt_data['output_path'], txt_data['frame_duration'])
 
         f = 0
         num_frames = joint_pos_data.shape[0]

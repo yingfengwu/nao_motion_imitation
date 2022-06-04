@@ -6,15 +6,15 @@ import argparse
 def main():
     # Command line arguments
     print(sys.path)
-    sys.path.extend(['F:/wyf/Python_Code/Bair_paper_code/nao_motion_imitation-master/venv/Lib/site-packages'])
+    sys.path.extend(['E:/my_data/MachineLearning/Python_Code/Bair_paper_code/motion_imitation-revised/venv/Scripts'])
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument("-n", dest="n", type=int, default='10')
+    arg_parser.add_argument("-n", dest="n", type=int, default='3')
 
     arg = arg_parser.parse_args()
     assert (arg.n > 0)
 
     print('Running with {:d} workers'.format(arg.n))
-    cmd = 'mpiexec -n {:d} F:/wyf/Python_Code/Bair_paper_code/nao_motion_imitation-master/venv/Scripts/python run.py '.format(arg.n)
+    cmd = 'mpiexec -n {:d} E:/my_data/MachineLearning/Python_Code/Bair_paper_code/motion_imitation-revised/venv/Scripts/python run.py '.format(arg.n)
     print('cmd: ' + cmd)
     subprocess.call(cmd, shell=True)
     return

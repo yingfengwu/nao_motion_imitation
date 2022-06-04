@@ -2,7 +2,7 @@
 @author: yingfengwu
 time: 2021/06/26
 
-This file is to transform the angle of joint to the radian of joint
+This file is to transform the angle of joint to the radian of joint and delete some unused columns
 """
 import pandas as pd
 import numpy as np
@@ -25,16 +25,16 @@ Keys=['Spine.X', 'Spine.Y', 'Spine.Z', 'Spine1.X', 'Spine1.Y', 'Spine1.Z',
       'LeftHand.Z',	'LeftHandEnd.X', 'LeftHandEnd.Y', 'LeftHandEnd.Z',
       'LeftHandThumb.X', 'LeftHandThumb.Y',	'LeftHandThumb.Z',
       'LeftHandThumbEnd.X',	'LeftHandThumbEnd.Y', 'LeftHandThumbEnd.Z',
-      'Head.X', 'Head.Y', 'Head.Z', 'HeadEnd.X', 'HeadEnd.Y', 'HeadEnd.Z',
-      'RightToeBase.X', 'RightToeBase.Y', 'RightToeBase.Z', 'RightToeBaseEnd.X',
-      'RightToeBaseEnd.Y', 'RightToeBaseEnd.Z', 'LeftToeBase.X', 'LeftToeBase.Y',
-      'LeftToeBase.Z', 'LeftToeBaseEnd.X', 'LeftToeBaseEnd.Y', 'LeftToeBaseEnd.Z'
+      'HeadEnd.X', 'HeadEnd.Y', 'HeadEnd.Z', 'RightToeBase.X', 'RightToeBase.Y',
+      'RightToeBase.Z', 'RightToeBaseEnd.X', 'RightToeBaseEnd.Y', 'RightToeBaseEnd.Z',
+      'LeftToeBase.X', 'LeftToeBase.Y', 'LeftToeBase.Z', 'LeftToeBaseEnd.X',
+      'LeftToeBaseEnd.Y', 'LeftToeBaseEnd.Z'
       ]
 
-for v in tqdm(range(len(Keys))):
+for v in tqdm(range(len(Keys))):  # delete some unused columns
     data = data.drop(Keys[v], axis=1)
 
-for i in tqdm(range(data.shape[0])):
+for i in tqdm(range(data.shape[0])):  # transform the angle of joint to the radian of joint
     for j in range(data.shape[1]):
         if j != 0:
             data.values[i][j] = data.values[i][j] * np.pi / 180
