@@ -17,7 +17,7 @@ run the angle2radian.py in retarget_motion/util/ to convert angle into radian an
 
 run the run_nao_retarget.py in retarget_motion/ to acquire motion of the target joint angle (output file retarget_motion_nao_jump.txt).
 
-## Forth step:
+## Fourth step:
 
 run the run.py in motion_imitation/ to train or test.
 
